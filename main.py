@@ -14,9 +14,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-@app.get("/debug-rate")
-def debug_rate():
-    return rate_limit_store
+from fastapi import Request
+
+@app.get("/debug-headers")
+def debug_headers(request: Request):
+    return dict(request.headers)
     
 TOTAL_ORDERS = 49
 RATE_LIMIT = 17
